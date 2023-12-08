@@ -1,3 +1,5 @@
+
+
 package com.ensat.controllers;
 
 import com.ensat.entities.Product;
@@ -45,11 +47,10 @@ public class ProductController {
         return "productshow";
     }
 
-    // Afficher le formulaire de modification du Product   view
-    @RequestMapping(path ={"/edit","/edit/{id}"} )
+    // Afficher le formulaire de modification du Product
+    @RequestMapping(path = {"/edit","/edit/{id}"})
     public String edit(@PathVariable Integer id, Model model) {
         model.addAttribute("product", productService.getProductById(id));
-
         return "productform";
     }
 
@@ -71,7 +72,7 @@ public class ProductController {
      * @param product
      * @return
      */
-    @RequestMapping(value = "/product", method = RequestMethod.POST)
+    @RequestMapping(value = " /product", method = RequestMethod.POST)
     public String saveProduct(Product product) {
         productService.saveProduct(product);
         return "redirect:/products/" + product.getId();
@@ -89,9 +90,9 @@ public class ProductController {
 //        return "redirect:/products";
 //    }
 
-    @DeleteMapping("/products/delete/{id}")
-    public String deleteProduct(@PathVariable Long id) {
-        // Delete logic
+    @RequestMapping(path={"/delete/{id}"})
+    public String delete(@PathVariable int id) {
+        productService.deleteProduct(id);
         return "redirect:/products";
     }
 
